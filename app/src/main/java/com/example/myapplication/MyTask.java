@@ -1,4 +1,4 @@
-package com.example.myapplication;
+/*package com.example.myapplication;
 
 import static com.example.myapplication.MainActivity.callChatGPTAPI;
 import static com.example.myapplication.MainActivity.extractTextFromChatGPTResponse;
@@ -18,14 +18,14 @@ import androidx.core.app.NotificationManagerCompat;
 
 import java.io.IOException;
 
-public class MyTask extends AsyncTask<Void, Void, String> {
+private class MyTask extends AsyncTask<Void, Void, String> {
 
     //private String color;
     private String contentText;
     /*public MyTask(String color){
         this.color = color;
     } */
-
+/*
     public String getContentText() {
         return contentText;
     }
@@ -47,3 +47,4 @@ public class MyTask extends AsyncTask<Void, Void, String> {
 
 
 }
+*/

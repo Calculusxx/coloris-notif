@@ -10,6 +10,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -40,7 +41,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
 
-    private static final String apiKey = "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";
+    private static final String apiKey=""; //put the api key here
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                   /*  addNotification(chatGptResponse); */
-                    MyTask myTask = new MyTask();
+                    MyTask myTask = new MyTask("blue");
                     myTask.execute();
 
-                    addNotification(myTask.getContentText());
+                    //addNotification(myTask.getContentText());
                 }
             });
 
@@ -127,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String CHATGPT_API_ENDPOINT = "https://api.openai.com/v1/chat/completions";
 
-    public static String callChatGPTAPI() throws IOException {
+    public static String callChatGPTAPI(String color) throws IOException {
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder urlBuilder = HttpUrl.parse(CHATGPT_API_ENDPOINT).newBuilder();
         /*urlBuilder.addQueryParameter("prompt", prompt); */
@@ -142,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                         "    \"messages\": [\n" +
                         "        {\n" +
                         "            \"role\": \"user\",\n" +
-                        "            \"content\": \"give me a fun fact about the color red\"\n" +
+                        "            \"content\": \"give me a fun fact about the color" + color +"\"\n" +
                         "        }\n" +
                         "    ]\n" +
                         "}"))
@@ -189,7 +190,35 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private class MyTask extends AsyncTask<Void, Void, String> {
 
+        private String color;
+        private String contentText;
+    public MyTask(String color){
+        this.color = color;
+    }
+
+        public String getContentText() {
+            return contentText;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                return extractTextFromChatGPTResponse(callChatGPTAPI(color));
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            addNotification(result);
+        }
+
+
+    }
 
 
 
