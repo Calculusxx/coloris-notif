@@ -41,7 +41,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
 
-    private static final String apiKey="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"; //put the api key here
+    private static final String apiKey=""; //put the api key here
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
