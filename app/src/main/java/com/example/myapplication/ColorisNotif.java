@@ -42,7 +42,7 @@ public class ColorisNotif extends Service {
     private static final String CHANNEL_ID = "coloris";
     private static final String CHANNEL_NAME = "coloris";
     private static final String CHANNEL_DESC = "coloris";
-    private static final String apiKey = "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";
+    private static final String apiKey = "";
 
     public void onCreate() {
         // Service initialization code
